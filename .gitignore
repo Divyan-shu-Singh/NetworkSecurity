@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+mlflow/mlruns/
+*.pkl
+__pycache__/
+.venv/
+
+.venv/
+__pycache__/
+*.pyc
+mlruns/
+artifacts/
+*.pkl
+*.joblib
+.envmlflow/mlruns/
+
+.env
