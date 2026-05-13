@@ -27,7 +27,7 @@ class NetworkDataExtract:
         try:
             df = pd.read_csv(csv_file_path)
             df.reset_index(drop=True, inplace=True)
-            records = list(json.load(df.T.to_json()).values())
+            records = list(json.loads(df.T.to_json()).values())
             logger.logging.info(f"CSV file {csv_file_path} converted to JSON successfully.")
             return records
         except Exception as e:
@@ -40,6 +40,7 @@ class NetworkDataExtract:
             collection = db[collection_name]
             collection.insert_many(data)
             logger.logging.info(f"Data inserted successfully into {database_name}.{collection_name} with length {len(data)}.")
+            return len(data)
         except Exception as e:
             logger.logging.error(f"Failed to insert data into {database_name}.{collection_name}: {e}")
             raise NetworkSecurityException(e, sys)
@@ -56,7 +57,7 @@ class NetworkDataExtract:
             raise NetworkSecurityException(e, sys)
         
 if __name__ == "__main__":
-    FILE_PATH = "NetworkSecurity\Network_Data\phishingData.csv"
+    FILE_PATH = os.path.join("Network_Data", "phishingData.csv")
     DATABASE = "NetworkSecurityDB"
     COLLECTION = "NetworkData"
     networkobj = NetworkDataExtract()
